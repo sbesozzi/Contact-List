@@ -249,7 +249,7 @@ var Router = _backbone2['default'].Router.extend({
   showAddFriend: function showAddFriend() {
     console.log('show add friend page');
     this.showSpinner();
-    this.$el.html(addFriend());
+    this.$el.html((0, _viewsAdd_friend2['default'])());
   },
 
   start: function start() {

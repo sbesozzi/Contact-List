@@ -134,7 +134,7 @@ let Router = Backbone.Router.extend( {
   showAddFriend: function() {
     console.log('show add friend page');
     this.showSpinner();
-    this.$el.html(addFriend());
+    this.$el.html(addFriendTemplate());
   },
 
   start: function() {
