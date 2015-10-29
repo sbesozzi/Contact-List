@@ -18,6 +18,7 @@ let Router = Backbone.Router.extend( {
   },
 
   initialize: function(appElement) {
+    // Set appElement to $el
     this.$el = appElement;
     console.log(appElement);
 
@@ -43,15 +44,20 @@ let Router = Backbone.Router.extend( {
 
 
     // Click event for add button
-    this.$el.on('click', '.add-button', (event) => {
+    this.$el.on('click', '.new-button', (event) => {
       console.log('button click to add new form');
-      let addFriendId = $li.data('add-friend-id');
-      this.navigate(`addFriend/${addFriendId}`, {trigger: true});
+      let $button = $(event.currentTarget);
+      let route = $button.data('to');
+      this.navigate(`addFriend`, {trigger: true});
     });
 
     // Click event for save button for new friend
     this.$el.on('click', '.save-button', (event) => {
-      console.log('Add new friend');
+      console.log('button click add new friend');
+      let $button = $(event.currentTarget);
+      let route = $button.data('to');
+      this.navigate(route, {trigger: true});
+    
 
       // Create new friend & find el value
       let name     = $(this.$el).find('.Name').val();

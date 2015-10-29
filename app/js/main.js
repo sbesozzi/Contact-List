@@ -145,6 +145,7 @@ var Router = _backbone2['default'].Router.extend({
   initialize: function initialize(appElement) {
     var _this = this;
 
+    // Set appElement to $el
     this.$el = appElement;
     console.log(appElement);
 
@@ -169,15 +170,19 @@ var Router = _backbone2['default'].Router.extend({
     });
 
     // Click event for add button
-    this.$el.on('click', '.add-button', function (event) {
+    this.$el.on('click', '.new-button', function (event) {
       console.log('button click to add new form');
-      var addFriendId = $li.data('add-friend-id');
-      _this.navigate('addFriend/' + addFriendId, { trigger: true });
+      var $button = (0, _jquery2['default'])(event.currentTarget);
+      var route = $button.data('to');
+      _this.navigate('addFriend', { trigger: true });
     });
 
     // Click event for save button for new friend
     this.$el.on('click', '.save-button', function (event) {
-      console.log('Add new friend');
+      console.log('button click add new friend');
+      var $button = (0, _jquery2['default'])(event.currentTarget);
+      var route = $button.data('to');
+      _this.navigate(route, { trigger: true });
 
       // Create new friend & find el value
       var name = (0, _jquery2['default'])(_this.$el).find('.Name').val();
