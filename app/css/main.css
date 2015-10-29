@@ -2045,10 +2045,20 @@ ul {
     font-size: 14px; }
 
 .photo {
-  height: 215px;
+  height: 232px;
   background-color: #D8C9FB; }
 
 .back-button {
   margin-top: 0; }
+
+.new-button {
+  margin-left: 40px;
+  margin-top: 90px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px; }
 
 /*# sourceMappingURL=main.css.map */

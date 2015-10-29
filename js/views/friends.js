@@ -13,10 +13,12 @@ function processData(data) {
 function friendsTemplate(data) {
   console.log('friends template');
   return `
-    <div class="friends-list">
+    <div class="friends-list">               
       <h3>Contact List</h3>
       <ul>${processData(data)}</ul>
+     <button class="new-button">Add Contact</button>
     </div>
+
   `;
 }
 

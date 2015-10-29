@@ -19,7 +19,7 @@ _jquery2['default'].ajaxSetup({
 
 });
 
-},{"jquery":9}],2:[function(require,module,exports){
+},{"jquery":10}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -43,7 +43,7 @@ var friendModel = _backbone2['default'].Model.extend({
 exports['default'] = friendModel;
 module.exports = exports['default'];
 
-},{"backbone":8}],3:[function(require,module,exports){
+},{"backbone":9}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -75,7 +75,7 @@ var friendsCollection = _backbone2['default'].Collection.extend({
 exports['default'] = friendsCollection;
 module.exports = exports['default'];
 
-},{"./friend_model":2,"backbone":8}],4:[function(require,module,exports){
+},{"./friend_model":2,"backbone":9}],4:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -99,7 +99,7 @@ router.start();
 
 console.log('Hello, World');
 
-},{"./ajax_setup":1,"./router":5,"jquery":9}],5:[function(require,module,exports){
+},{"./ajax_setup":1,"./router":5,"jquery":10}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -128,13 +128,18 @@ var _viewsFriend = require('./views/friend');
 
 var _viewsFriend2 = _interopRequireDefault(_viewsFriend);
 
+var _viewsAdd_friend = require('./views/add_friend');
+
+var _viewsAdd_friend2 = _interopRequireDefault(_viewsAdd_friend);
+
 // Create Router & Call extend method
 var Router = _backbone2['default'].Router.extend({
   // Create routes
   routes: {
     "": "redirectToFriends",
     "friends": "showFriends",
-    "friend/:id": "showFriend"
+    "friend/:id": "showFriend",
+    "addFriend": "showAddFriend"
   },
 
   initialize: function initialize(appElement) {
@@ -146,19 +151,52 @@ var Router = _backbone2['default'].Router.extend({
     this.friends = new _friends_collection2['default']();
 
     var router = this;
+
     // Click event for contact list
     this.$el.on('click', '.friend-list-item', function (event) {
       var $li = (0, _jquery2['default'])(event.currentTarget);
-
       var friendId = $li.data('friend-id');
       _this.navigate('friend/' + friendId, { trigger: true });
-      _this.showFriend(friendId);
+
+      // this.showFriend(friendId);
     });
+
     // Click event for back button
     this.$el.on('click', '.back-button', function (event) {
       var $button = (0, _jquery2['default'])(event.currentTarget);
       var route = $button.data('to');
       _this.navigate(route, { trigger: true });
+    });
+
+    // Click event for add button
+    this.$el.on('click', '.add-button', function (event) {
+      console.log('button click to add new form');
+      _this.navigate('addFriend', { trigger: true });
+    });
+
+    // Click event for save button for new friend
+    this.$el.on('click', '.save-button', function (event) {
+      console.log('Add new friend');
+
+      // Create new friend & find el value
+      var name = (0, _jquery2['default'])(_this.$el).find('.Name').val();
+      var email = (0, _jquery2['default'])(_this.$el).find('.Email').val();
+      var phone = (0, _jquery2['default'])(_this.$el).find('.Phone').val();
+      var location = (0, _jquery2['default'])(_this.$el).find('.Location').val();
+
+      var addFriend = new friendModel({
+        Name: name,
+        Email: email,
+        Phone: phone,
+        Location: location
+      });
+
+      // add & save newFriend
+      _this.collection.add(addFriend);
+      addFriend.save().then(function () {
+        alert('You added a new friend!');
+        _this.navigate('""', { trigger: true });
+      });
     });
   },
 
@@ -207,6 +245,12 @@ var Router = _backbone2['default'].Router.extend({
     }
   },
 
+  showAddFriend: function showAddFriend() {
+    console.log('show add friend page');
+    this.showSpinner();
+    this.$el.html(addFriend());
+  },
+
   start: function start() {
     _backbone2['default'].history.start();
     return this;
@@ -217,20 +261,33 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./friends_collection":3,"./views/friend":6,"./views/friends":7,"backbone":8,"jquery":9}],6:[function(require,module,exports){
+},{"./friends_collection":3,"./views/add_friend":6,"./views/friend":7,"./views/friends":8,"backbone":9,"jquery":10}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function addFriendTemplate(data) {
+  return "\n\n    <div class=\"add-friend\">\n      <h2>Add Friend</h2>\n      <form>\n        <label>Name: <input type=\"text\" class=\"name\"</label>\n        <label>Email: <input type=\"text\" class=\"email\"</label>\n        <label>Phone Number: <input type=\"text\" class=\"phone\"</label>\n        <label>Location: <input type=\"text\" class=\"location\"</label>\n      </form>\n      <button class=\"save-button\" data-to></button>\n    </div>\n\n  ";
+}
+
+exports["default"] = addFriendTemplate;
+module.exports = exports["default"];
+
+},{}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function friendTemplate(data) {
-  return "\n\n    <ul class=\"friend\">\n\n      \n      <li class=\"photo\"><p class=\"back-button\" data-to>\n        <i class='fa fa-arrow-left'></i>\n      </p>" + data.Photo + "</li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
+  return "\n\n    <ul class=\"friend\">\n      <li class=\"photo\"><p class=\"back-button\" data-to>\n        <i class='fa fa-arrow-left'></i>\n      </p></li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
 }
 
 exports["default"] = friendTemplate;
 module.exports = exports["default"];
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -245,13 +302,13 @@ function processData(data) {
 
 function friendsTemplate(data) {
   console.log('friends template');
-  return '\n    <div class="friends-list">\n      <h3>Contact List</h3>\n      <ul>' + processData(data) + '</ul>\n    </div>\n  ';
+  return '\n    <div class="friends-list">               \n      <h3>Contact List</h3>\n      <ul>' + processData(data) + '</ul>\n     <button class="new-button">Add Contact</button>\n    </div>\n\n  ';
 }
 
 exports['default'] = friendsTemplate;
 module.exports = exports['default'];
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -2150,7 +2207,7 @@ module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":9,"underscore":10}],9:[function(require,module,exports){
+},{"jquery":10,"underscore":11}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11362,7 +11419,7 @@ return jQuery;
 
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
