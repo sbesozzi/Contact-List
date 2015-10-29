@@ -171,7 +171,8 @@ var Router = _backbone2['default'].Router.extend({
     // Click event for add button
     this.$el.on('click', '.add-button', function (event) {
       console.log('button click to add new form');
-      _this.navigate('addFriend', { trigger: true });
+      var addFriendId = $li.data('add-friend-id');
+      _this.navigate('addFriend/' + addFriendId, { trigger: true });
     });
 
     // Click event for save button for new friend
