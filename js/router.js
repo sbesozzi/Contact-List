@@ -58,14 +58,13 @@ let Router = Backbone.Router.extend( {
       let route = $button.data('to');
       this.navigate(route, {trigger: true});
     
-
       // Create new friend & find el value
       let name     = $(this.$el).find('.Name').val();
       let email    = $(this.$el).find('.Email').val();
       let phone    = $(this.$el).find('.Phone').val();
       let location = $(this.$el).find('.Location').val();
 
-      let addFriend = new friendModel({
+      let newFriend = new friendModel({
         Name: name,
         Email: email,
         Phone: phone,
@@ -73,10 +72,12 @@ let Router = Backbone.Router.extend( {
       });
 
       // add & save newFriend
-      this.collection.add(addFriend);
-      addFriend.save().then(() => {
+      this.collection.add(newFriend);
+      newFriend.save().then(() => {
         alert('You added a new friend!');
-        this.navigate(`""`, {trigger: true});
+        let route = $button.data('to');
+        this.navigate(route, {trigger: true});
+        // this.navigate(`""`, {trigger: true});
       });
       
     });
