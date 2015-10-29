@@ -22,7 +22,7 @@ let Router = Backbone.Router.extend( {
     this.friends = new friendsCollection();
 
     let router = this;
-
+    // Click event for contact list
     this.$el.on('click', '.friend-list-item', (event) => {
       let $li = $(event.currentTarget);
 

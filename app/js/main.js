@@ -146,7 +146,7 @@ var Router = _backbone2['default'].Router.extend({
     this.friends = new _friends_collection2['default']();
 
     var router = this;
-
+    // Click event for contact list
     this.$el.on('click', '.friend-list-item', function (event) {
       var $li = (0, _jquery2['default'])(event.currentTarget);
 
@@ -224,7 +224,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function friendTemplate(data) {
-  return "\n\n    <ul class=\"friend\">\n      <button class=\"back-button\" data-to>\n        <i class='fa fa-arrow-left'></i>\n      </button>\n      <li class=\"photo\">" + data.Photo + "</li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
+  return "\n\n    <ul class=\"friend\">\n\n      \n      <li class=\"photo\"><p class=\"back-button\" data-to>\n        <i class='fa fa-arrow-left'></i>\n      </p>" + data.Photo + "</li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
 }
 
 exports["default"] = friendTemplate;

@@ -1,7 +1,49 @@
 @import "bourbon";
-@import "neat";
 @import "font-awesome";
 
-body {
-  background: #e2ebf3;
+
+ul {
+  list-style-type: none;
 }
+
+.app {
+  height: 500px;
+  width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  border: 1px solid #DDDDDD;
+  border-radius: 5px;
+
+  h3 {
+    height: 50px;
+    margin: 0;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: white;
+    background-color: #DCAEFF;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 20px 20px;
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 14px;
+
+  }
+
+}
+
+.photo {
+  height: 215px;
+  background-color: #D8C9FB;
+}
+
+.back-button {
+  margin-top: 0;
+}
+
