@@ -269,7 +269,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function addFriendTemplate(data) {
-  return "\n\n    <div class=\"add-friend\">\n      <h2>Add Friend</h2>\n      <form>\n        <label>Name: <input type=\"text\" class=\"name\"</label>\n        <label>Email: <input type=\"text\" class=\"email\"</label>\n        <label>Phone Number: <input type=\"text\" class=\"phone\"</label>\n        <label>Location: <input type=\"text\" class=\"location\"</label>\n      </form>\n      <button class=\"save-button\" data-to></button>\n    </div>\n\n  ";
+  return "\n\n    <div class=\"add-friend\">\n      <h2>Add Friend</h2>\n      <form>\n        <label>Name: <input type=\"text\" class=\"name\"</label><br>\n        <label>Email: <input type=\"text\" class=\"email\"</label><br>\n        <label>Phone Number: <input type=\"text\" class=\"phone\"</label><br>\n        <label>Location: <input type=\"text\" class=\"location\"</label><br>\n      </form>\n      <button class=\"save-button\" data-to>Save</button>\n    </div>\n\n  ";
 }
 
 exports["default"] = addFriendTemplate;

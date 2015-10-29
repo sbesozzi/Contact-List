@@ -4,12 +4,12 @@ function addFriendTemplate (data) {
     <div class="add-friend">
       <h2>Add Friend</h2>
       <form>
-        <label>Name: <input type="text" class="name"</label>
-        <label>Email: <input type="text" class="email"</label>
-        <label>Phone Number: <input type="text" class="phone"</label>
-        <label>Location: <input type="text" class="location"</label>
+        <label>Name: <input type="text" class="name"</label><br>
+        <label>Email: <input type="text" class="email"</label><br>
+        <label>Phone Number: <input type="text" class="phone"</label><br>
+        <label>Location: <input type="text" class="location"</label><br>
       </form>
-      <button class="save-button" data-to></button>
+      <button class="save-button" data-to>Save</button>
     </div>
 
   `;
