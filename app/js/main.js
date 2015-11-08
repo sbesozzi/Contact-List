@@ -120,6 +120,10 @@ var _friends_collection = require('./friends_collection');
 
 var _friends_collection2 = _interopRequireDefault(_friends_collection);
 
+var _friend_model = require('./friend_model');
+
+var _friend_model2 = _interopRequireDefault(_friend_model);
+
 var _viewsFriends = require('./views/friends');
 
 var _viewsFriends2 = _interopRequireDefault(_viewsFriends);
@@ -157,6 +161,7 @@ var Router = _backbone2['default'].Router.extend({
     this.$el.on('click', '.friend-list-item', function (event) {
       var $li = (0, _jquery2['default'])(event.currentTarget);
       var friendId = $li.data('friend-id');
+
       _this.navigate('friend/' + friendId, { trigger: true });
 
       // this.showFriend(friendId);
@@ -180,9 +185,9 @@ var Router = _backbone2['default'].Router.extend({
     // Click event for save button for new friend
     this.$el.on('click', '.save-button', function (event) {
       console.log('button click add new friend');
-      var $button = (0, _jquery2['default'])(event.currentTarget);
-      var route = $button.data('to');
-      _this.navigate(route, { trigger: true });
+      // let $button = $(event.currentTarget);
+      // let route = $button.data('to');
+      // this.navigate(route, {trigger: true});
 
       // Create new friend & find el value
       var name = (0, _jquery2['default'])(_this.$el).find('.Name').val();
@@ -190,7 +195,7 @@ var Router = _backbone2['default'].Router.extend({
       var phone = (0, _jquery2['default'])(_this.$el).find('.Phone').val();
       var location = (0, _jquery2['default'])(_this.$el).find('.Location').val();
 
-      var newFriend = new friendModel({
+      var newFriend = new _friend_model2['default']({
         Name: name,
         Email: email,
         Phone: phone,
@@ -198,12 +203,14 @@ var Router = _backbone2['default'].Router.extend({
       });
 
       // add & save newFriend
-      _this.collection.add(newFriend);
+      _this.friends.add(newFriend);
       newFriend.save().then(function () {
         alert('You added a new friend!');
+        // let route = $button.data('to');
+        // this.navigate(`friends`, {trigger: true});
+        var $button = (0, _jquery2['default'])(event.currentTarget);
         var route = $button.data('to');
         _this.navigate(route, { trigger: true });
-        // this.navigate(`""`, {trigger: true});
       });
     });
   },
@@ -269,7 +276,7 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./friends_collection":3,"./views/add_friend":6,"./views/friend":7,"./views/friends":8,"backbone":9,"jquery":10}],6:[function(require,module,exports){
+},{"./friend_model":2,"./friends_collection":3,"./views/add_friend":6,"./views/friend":7,"./views/friends":8,"backbone":9,"jquery":10}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

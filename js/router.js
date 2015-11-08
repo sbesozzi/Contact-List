@@ -2,6 +2,8 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 import friendsCollection from './friends_collection';
+import friendModel from './friend_model';
+
 
 import friendsTemplate from './views/friends';
 import friendTemplate from './views/friend';
@@ -17,7 +19,7 @@ let Router = Backbone.Router.extend( {
     "addFriend" : "showAddFriend"
   },
 
-  initialize: function(appElement) {
+  initialize(appElement) {
     // Set appElement to $el
     this.$el = appElement;
     console.log(appElement);
@@ -30,6 +32,7 @@ let Router = Backbone.Router.extend( {
     this.$el.on('click', '.friend-list-item', (event) => {
       let $li = $(event.currentTarget);
       let friendId = $li.data('friend-id');
+
       this.navigate(`friend/${friendId}`, {trigger: true}); 
 
       // this.showFriend(friendId);
@@ -54,9 +57,9 @@ let Router = Backbone.Router.extend( {
     // Click event for save button for new friend
     this.$el.on('click', '.save-button', (event) => {
       console.log('button click add new friend');
-      let $button = $(event.currentTarget);
-      let route = $button.data('to');
-      this.navigate(route, {trigger: true});
+      // let $button = $(event.currentTarget);
+      // let route = $button.data('to');
+      // this.navigate(route, {trigger: true});
     
       // Create new friend & find el value
       let name     = $(this.$el).find('.Name').val();
@@ -72,25 +75,27 @@ let Router = Backbone.Router.extend( {
       });
 
       // add & save newFriend
-      this.collection.add(newFriend);
+      this.friends.add(newFriend);
       newFriend.save().then(() => {
         alert('You added a new friend!');
+        // let route = $button.data('to');
+        // this.navigate(`friends`, {trigger: true});
+        let $button = $(event.currentTarget);
         let route = $button.data('to');
         this.navigate(route, {trigger: true});
-        // this.navigate(`""`, {trigger: true});
       });
       
     });
   },
 
 
-  showSpinner: function() {
+  showSpinner() {
     this.$el.html(
       '<i class="fa fa-spinner fa-spin"></i>'
       );
   },
 
-  redirectToFriends: function() {
+  redirectToFriends() {
     console.log('show redirect page');
     this.navigate('friends', {
       replace: true,
@@ -98,7 +103,7 @@ let Router = Backbone.Router.extend( {
     });
   },
 
-  showFriends: function() {
+  showFriends() {
     console.log('show friends page');
 
     this.showSpinner();
@@ -114,7 +119,7 @@ let Router = Backbone.Router.extend( {
     });
   },
 
-  showFriend: function(friendId) {
+  showFriend(friendId) {
     console.log('show friend page');
     let friend = this.friends.get(friendId);
 
@@ -138,13 +143,13 @@ let Router = Backbone.Router.extend( {
   
   },
 
-  showAddFriend: function() {
+  showAddFriend() {
     console.log('show add friend page');
     this.showSpinner();
     this.$el.html(addFriendTemplate());
   },
 
-  start: function() {
+  start() {
     Backbone.history.start();
     return this;
   }
