@@ -2056,7 +2056,15 @@ ul {
 
 .photo {
   height: 232px;
+  width: 360px;
   background-color: #D8C9FB; }
+  .photo .back-button {
+    margin-bottom: 0; }
+  .photo .friend-image {
+    width: 240px;
+    margin: auto; }
+  .photo img {
+    width: 240px; }
 
 .back-button {
   margin-top: 0; }
@@ -2074,19 +2082,22 @@ ul {
 
 .add-friend form {
   display: block;
-  padding-top: 20px; }
+  padding-top: 20px;
+  padding-left: 10px; }
 
 .add-friend label {
-  padding-left: 10px; }
+  padding-left: 20px; }
 
 .add-friend input {
   border-radius: 4px;
   text-decoration: none;
-  font-size: 14px; }
+  font-size: 14px;
+  float: right;
+  margin-right: 150px; }
 
 .add-friend button {
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 5px 20px;
   color: white;
   font-size: 14px;

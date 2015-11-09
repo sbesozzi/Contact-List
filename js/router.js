@@ -55,17 +55,14 @@ let Router = Backbone.Router.extend( {
     });
 
     // Click event for save button for new friend
-    this.$el.on('click', '.save-button', (event) => {
+    this.$el.on('click', '.save-button', () => {
       console.log('button click add new friend');
-      // let $button = $(event.currentTarget);
-      // let route = $button.data('to');
-      // this.navigate(route, {trigger: true});
     
       // Create new friend & find el value
-      let name     = $(this.$el).find('.Name').val();
-      let email    = $(this.$el).find('.Email').val();
-      let phone    = $(this.$el).find('.Phone').val();
-      let location = $(this.$el).find('.Location').val();
+      let name     = $(this.$el).find('.name').val();
+      let email    = $(this.$el).find('.email').val();
+      let phone    = $(this.$el).find('.phone').val();
+      let location = $(this.$el).find('.location').val();
 
       let newFriend = new friendModel({
         Name: name,
@@ -77,12 +74,10 @@ let Router = Backbone.Router.extend( {
       // add & save newFriend
       this.friends.add(newFriend);
       newFriend.save().then(() => {
-        alert('You added a new friend!');
+        alert('You added a new contact!');
+        // let $button = $(event.currentTarget);
         // let route = $button.data('to');
-        // this.navigate(`friends`, {trigger: true});
-        let $button = $(event.currentTarget);
-        let route = $button.data('to');
-        this.navigate(route, {trigger: true});
+        this.navigate('', {trigger: true});
       });
       
     });

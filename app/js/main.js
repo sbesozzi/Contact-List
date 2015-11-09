@@ -183,17 +183,14 @@ var Router = _backbone2['default'].Router.extend({
     });
 
     // Click event for save button for new friend
-    this.$el.on('click', '.save-button', function (event) {
+    this.$el.on('click', '.save-button', function () {
       console.log('button click add new friend');
-      // let $button = $(event.currentTarget);
-      // let route = $button.data('to');
-      // this.navigate(route, {trigger: true});
 
       // Create new friend & find el value
-      var name = (0, _jquery2['default'])(_this.$el).find('.Name').val();
-      var email = (0, _jquery2['default'])(_this.$el).find('.Email').val();
-      var phone = (0, _jquery2['default'])(_this.$el).find('.Phone').val();
-      var location = (0, _jquery2['default'])(_this.$el).find('.Location').val();
+      var name = (0, _jquery2['default'])(_this.$el).find('.name').val();
+      var email = (0, _jquery2['default'])(_this.$el).find('.email').val();
+      var phone = (0, _jquery2['default'])(_this.$el).find('.phone').val();
+      var location = (0, _jquery2['default'])(_this.$el).find('.location').val();
 
       var newFriend = new _friend_model2['default']({
         Name: name,
@@ -205,12 +202,10 @@ var Router = _backbone2['default'].Router.extend({
       // add & save newFriend
       _this.friends.add(newFriend);
       newFriend.save().then(function () {
-        alert('You added a new friend!');
+        alert('You added a new contact!');
+        // let $button = $(event.currentTarget);
         // let route = $button.data('to');
-        // this.navigate(`friends`, {trigger: true});
-        var $button = (0, _jquery2['default'])(event.currentTarget);
-        var route = $button.data('to');
-        _this.navigate(route, { trigger: true });
+        _this.navigate('', { trigger: true });
       });
     });
   },
@@ -283,7 +278,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function addFriendTemplate(data) {
-  return "\n\n    <div class=\"add-friend\">\n      <h3>Add Friend</h3>\n      <form>\n        <label>Name: <input type=\"text\" class=\"name\"</label><br>\n        <label>Email: <input type=\"text\" class=\"email\"</label><br>\n        <label>Phone Number: <input type=\"text\" class=\"phone\"</label><br>\n        <label>Location: <input type=\"text\" class=\"location\"</label><br>\n      </form>\n      <button class=\"save-button\" data-to>Save</button>\n    </div>\n\n  ";
+  return "\n\n    <div class=\"add-friend\">\n      <h3>Add Friend</h3>\n      <form>\n        <label>Name <input type=\"text\" class=\"name\"</label><br><br>\n        <label>Email <input type=\"text\" class=\"email\"</label><br><br>\n        <label>Phone <input type=\"text\" class=\"phone\"</label><br><br>\n        <label>Local <input type=\"text\" class=\"location\"</label><br>\n      </form>\n      <button class=\"save-button\" data-to>Save</button>\n    </div>\n\n  ";
 }
 
 exports["default"] = addFriendTemplate;
@@ -296,7 +291,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function friendTemplate(data) {
-  return "\n\n    <ul class=\"friend\">\n      <li class=\"photo\"><p class=\"back-button\" data-to>\n        <i class='fa fa-arrow-left'></i>\n      </p></li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
+  return "\n\n    <ul class=\"friend\">\n      <li class=\"photo\">\n        <p class=\"back-button\" data-to><i class='fa fa-arrow-left'></i></p>\n        <div class=\"friend-image\">\n          <img src=\"http://www.wesleyan.edu/molbiophys/Trainees/default-profile.png\">\n        </div>\n        </li>\n      <li><i class='fa fa-user'></i>  " + data.Name + "</li>\n      <li><i class='fa fa-envelope'></i>  " + data.Email + "</li>\n      <li><i class='fa fa-phone-square'></i>  " + data.Phone + "</li>\n      <li><i class='fa fa-globe'></i>  " + data.Location + "</li>\n    </ul>\n\n  ";
 }
 
 exports["default"] = friendTemplate;
