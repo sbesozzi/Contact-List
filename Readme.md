@@ -2,6 +2,8 @@
 
 > Creating a simple contact list using Backbone.js
 
+- Deployed version at http://tiy.sarah.friends.contact.surge.sh/#friends
+
 
 ## Usage
 
